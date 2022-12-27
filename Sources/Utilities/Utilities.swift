@@ -1,2 +1,2 @@
-import Algorithms
-import Foundation
+@_exported import Algorithms
+@_exported import Foundation

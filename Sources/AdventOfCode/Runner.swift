@@ -3,15 +3,17 @@ import Utilities
 
 struct AdventRunner {
     
-    let day: any Day
-    
-    func run() {
+    func run(year: Int, day: Int) {
         
-        part1()
-        part2()
+        let day = _AdventOfCode
+            .year(year)
+            .day(day)
+        
+        part1(of: day)
+        part2(of: day)
     }
     
-    private func part1() {
+    private func part1(of day: any Day) {
         let startTime = Date()
         
         guard let output = day.part1() else {
@@ -32,7 +34,7 @@ struct AdventRunner {
         print(message)
     }
     
-    private func part2() {
+    private func part2(of day: any Day) {
         let startTime = Date()
         
         guard let output = day.part2() else {
