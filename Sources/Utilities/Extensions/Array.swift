@@ -29,7 +29,7 @@ public extension Array {
     
     func removingFirst(_ k: Int = 1) -> Self {
         var copy = self
-        copy.removeFirst(Swift.min(k, count - 1))
+        copy.removeFirst(Swift.max(0, Swift.min(k, count - 1)))
         return copy
     }
     

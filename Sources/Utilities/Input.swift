@@ -4,7 +4,7 @@ public final class Input {
     
     public lazy var lines: Array<String> = {
         raw.components(separatedBy: .newlines)
-            .dropLast()
+            .trimmed()
     }()
     
     init(filePath: String) {
