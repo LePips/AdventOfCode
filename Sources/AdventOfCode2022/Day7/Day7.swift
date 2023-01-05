@@ -38,7 +38,7 @@ struct Day7: Day {
                 } else if parts[0] == "dir" {
                     // ignore
                 } else {
-                    let fileNode: Node<Inode> = Node(value: .init(name: parts[1].asString, isDirectory: false, size: parts[0].asString.asInt))
+                    let fileNode: Node<Inode> = Node(value: .init(name: parts[1].asString, isDirectory: false, size: parts[0].asString.asInt!))
                     current.addChild(fileNode)
                 }
             }

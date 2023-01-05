@@ -1,6 +1,6 @@
 public extension Collection {
     
-    func asArray() -> Array<Element> {
+    var asArray: Array<Element> {
         Array(self)
     }
     
@@ -27,7 +27,7 @@ public extension Collection where Element: Equatable {
 
 public extension Collection where Element: Hashable {
     
-    func asSet() -> Set<Element> {
+    var asSet: Set<Element> {
         Set(self)
     }
 }

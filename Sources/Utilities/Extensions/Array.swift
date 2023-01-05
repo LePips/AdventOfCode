@@ -20,7 +20,8 @@ public extension Array {
         [element] + self
     }
     
-    func poppingLast(_ k: Int) -> Self {
+    func poppingLast(_ k: Int = 1) -> Self {
+        guard k >= 1 else { fatalError("Array.poppingLast: k must be >= 1") }
         var copy = self
         
         return (0..<k)
@@ -28,12 +29,14 @@ public extension Array {
     }
     
     func removingFirst(_ k: Int = 1) -> Self {
+        guard k >= 1 else { fatalError("Array.removingFirst: k must be >= 1") }
         var copy = self
         copy.removeFirst(Swift.max(0, Swift.min(k, count - 1)))
         return copy
     }
     
     func removingLast(_ k: Int = 1) -> Self {
+        guard k >= 1 else { fatalError("Array.removingLast: k must be >= 1") }
         var copy = self
         copy.removeLast(Swift.min(k, count - 1))
         return copy

@@ -4,15 +4,15 @@ public extension String {
     
     static let empty = ""
     
-    var asInt: Int {
-        Int(self)!
+    var asInt: Int? {
+        Int(self)
     }
 }
 
 public extension Substring {
     
     var asInt: Int? {
-        Int(self.asString)
+        asString.asInt
     }
     
     var asString: String {

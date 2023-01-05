@@ -2,15 +2,15 @@ struct Day5: Day {
     
     func stacks() -> [Int: [Character]] {
         [
-            1: "RNPG".asArray(),
-            2: "TJBLCSVH".asArray(),
-            3: "TDBMNL".asArray(),
-            4: "RVPSB".asArray(),
-            5: "GCQSWMVH".asArray(),
-            6: "WQSCDBJ".asArray(),
-            7: "FQL".asArray(),
-            8: "WMHTDLFV".asArray(),
-            9: "LPBVMJF".asArray()
+            1: "RNPG".asArray,
+            2: "TJBLCSVH".asArray,
+            3: "TDBMNL".asArray,
+            4: "RVPSB".asArray,
+            5: "GCQSWMVH".asArray,
+            6: "WQSCDBJ".asArray,
+            7: "FQL".asArray,
+            8: "WMHTDLFV".asArray,
+            9: "LPBVMJF".asArray
         ]
     }
     

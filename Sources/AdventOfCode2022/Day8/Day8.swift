@@ -5,15 +5,15 @@ struct Day8: Day {
     }
     
     func forestMatrix() -> Matrix<Int> {
-        Matrix(rows: input().lines.map { $0.asArray().compactMap(\.asInt) })
+        Matrix(rows: input().lines.map { $0.asArray.compactMap(\.asInt) })
     }
     
     func visibleTreeCount(along eyeline: ArraySlice<Int>, value: Int) -> Int {
-        visibleTreeCount(along: eyeline.asArray(), value: value)
+        visibleTreeCount(along: eyeline.asArray, value: value)
     }
     
     func visibleTreeCount(along eyeline: ReversedCollection<ArraySlice<Int>>, value: Int) -> Int {
-        visibleTreeCount(along: eyeline.asArray(), value: value)
+        visibleTreeCount(along: eyeline.asArray, value: value)
     }
     
     func visibleTreeCount(along eyeline: Array<Int>, value: Int) -> Int {

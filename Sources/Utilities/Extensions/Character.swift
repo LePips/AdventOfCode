@@ -1,7 +1,7 @@
 public extension Character {
     
     var asInt: Int? {
-        Int(self.asString)
+        asString.asInt
     }
     
     var asString: String {
