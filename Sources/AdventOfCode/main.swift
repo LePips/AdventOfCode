@@ -1,4 +1,4 @@
 AdventRunner().run(
-    year: 2022,
-    day: 6
+    year: 2023,
+    day: 1
 )

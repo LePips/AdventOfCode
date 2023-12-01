@@ -11,4 +11,9 @@ public extension Day {
     func input(_ file: String = #filePath) -> Input {
         Input(filePath: file.replacingOccurrences(of: ".swift", with: ".txt"))
     }
+    
+    func lines(_ file: String = #filePath) -> [String] {
+        Input(filePath: file.replacingOccurrences(of: ".swift", with: ".txt"))
+            .lines
+    }
 }

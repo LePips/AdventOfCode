@@ -20,6 +20,7 @@ let package = Package(
             name: "AdventOfCode",
             dependencies: [
                 "AdventOfCode2022",
+                "AdventOfCode2023",
             ]
         ),
         .target(
@@ -30,6 +31,10 @@ let package = Package(
         ),
         .target(
             name: "AdventOfCode2022",
+            dependencies: ["Utilities"]
+        ),
+        .target(
+            name: "AdventOfCode2023",
             dependencies: ["Utilities"]
         ),
     ]

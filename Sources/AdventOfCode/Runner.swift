@@ -5,6 +5,8 @@ struct AdventRunner {
     
     func run(year: Int, day: Int) {
         
+        print(header(year: year, day: day))
+        
         let day = _AdventOfCode
             .year(year)
             .day(day)
@@ -55,11 +57,20 @@ struct AdventRunner {
         print(message)
     }
     
+    private func header(
+        year: Int,
+        day: Int
+    ) -> String {
+        """
+        \(year) - Day \(day)\n
+        """
+    }
+    
     private func message(
         part: Int,
         output: CustomStringConvertible,
         runtime: TimeInterval
-    ) -> String{
+    ) -> String {
         """
         Part \(part): \(output)
         -- runtime: \(runtime)\n
