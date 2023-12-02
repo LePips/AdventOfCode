@@ -42,3 +42,14 @@ public extension Array {
         return copy
     }
 }
+
+public extension Array where Element == Bool {
+    
+    func areAllTrue() -> Bool {
+        allSatisfy { $0 }
+    }
+    
+    func areAllFalse() -> Bool {
+        allSatisfy { !$0 }
+    }
+}
