@@ -88,4 +88,11 @@ createYearContext(
         )
     }
 
-print("Remember to setup the targets and imports!")
+let reminder = """
+Remember to add the new year in:
+
+- `Package.swift` for targets
+- `AdventOfCode.swift` for imports
+"""
+
+print(reminder)
