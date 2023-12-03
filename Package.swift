@@ -19,6 +19,7 @@ let package = Package(
         .executableTarget(
             name: "AdventOfCode",
             dependencies: [
+                "AdventOfCode2015",
                 "AdventOfCode2022",
                 "AdventOfCode2023",
             ]
@@ -28,6 +29,10 @@ let package = Package(
             dependencies: [
                 .product(name: "Algorithms", package: "swift-algorithms"),
             ]
+        ),
+        .target(
+            name: "AdventOfCode2015",
+            dependencies: ["Utilities"]
         ),
         .target(
             name: "AdventOfCode2022",

@@ -8,6 +8,10 @@ public extension String {
         Int(self)
     }
     
+    func count(of substring: String) -> Int {
+        components(separatedBy: substring).count - 1
+    }
+    
     func matches(for regex: String) -> [String] {
         do {
             let regex = try NSRegularExpression(pattern: regex)
@@ -15,6 +19,19 @@ public extension String {
             
             return results.map {
                 String(self[Range($0.range, in: self)!])
+            }
+        } catch let error {
+            fatalError("Invalid regex: \(error.localizedDescription)")
+        }
+    }
+    
+    func rangeMatches(for regex: String) -> [(String, ClosedRange<Int>)] {
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: self, range: NSRange(self.startIndex..., in: self))
+            
+            return results.map {
+                (String(self[Range($0.range, in: self)!]), $0.range.asClosedRange)
             }
         } catch let error {
             fatalError("Invalid regex: \(error.localizedDescription)")

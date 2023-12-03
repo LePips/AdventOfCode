@@ -16,4 +16,25 @@ public extension Day {
         Input(filePath: file.replacingOccurrences(of: ".swift", with: ".txt"))
             .lines
     }
+    
+    func matrix(_ file: String = #filePath) -> Matrix<Character> {
+        Matrix(rows: lines().map(\.asArray))
+    }
+    
+    func sampleInput(_ file: String = #filePath) -> Input {
+        Input(filePath: file
+            .split(separator: ".")[0]
+            .appending("Sample")
+            .appending(".txt")
+        )
+    }
+    
+    func sampleLines(_ file: String = #filePath) -> [String] {
+        Input(filePath: file
+            .split(separator: ".")[0]
+            .appending("Sample")
+            .appending(".txt")
+        )
+        .lines
+    }
 }
