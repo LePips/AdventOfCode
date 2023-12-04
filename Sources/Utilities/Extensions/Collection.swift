@@ -16,9 +16,8 @@ public extension Collection {
 public extension Collection where Element: Comparable {
     
     func max(_ amount: Int = 1) -> [Element] {
-        let sorted = sorted()
-        
-        return Array(sorted[(count - amount)..<count])
+        sorted()[(count - amount) ..< count]
+            .asArray
     }
 }
 
@@ -29,33 +28,9 @@ public extension Collection where Element: Equatable {
     }
 }
 
-public extension Collection where Element: Hashable {
-    
-    var asSet: Set<Element> {
-        Set(self)
-    }
-}
-
-public extension Collection where Element == Int {
-    
-    func sum() -> Int {
-        reduce(0, +)
-    }
-}
-
-public extension Collection where Element: StringProtocol {
-    
-    var asInts: Array<Int> {
-        compactMap { Int($0) }
-    }
-    
-    var asStrings: Array<String> {
-        compactMap { String($0) }
-    }
-}
-
 public extension Collection where Element: Collection, Element.Element: Hashable {
     
+    /// Find the intersecting elements between Collection elements
     func intersectingElements() -> Set<Element.Element> {
         guard let f = first else { return [] }
         var final = Set(f)
