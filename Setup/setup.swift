@@ -1,8 +1,5 @@
 #!/usr/bin/env swift
 
-// TODO: allow piecemeal creation
-// - sample files
-
 import Foundation
 
 // MARK: Utilities
@@ -12,7 +9,13 @@ func error(_ message: String) {
 }
 
 func usage() {
-    print("Usage: setup.swift <year>")
+    let message = """
+USAGE: setup.swift <year> [sample]
+
+SUBCOMMANDS:
+  sample              Create sample files for days in the year
+"""
+    print(message)
 }
 
 func createDirectory(at url: URL) {
@@ -57,11 +60,52 @@ func createDayContext(day: Int, year: Int, at root: URL, setupDirectory: URL) {
 
     createFile(with: currentDayFile, at: dayDirectory.appending(path: "Day\(day).swift"))
     createFile(with: "", at: dayDirectory.appending(path: "Day\(day).txt"))
+    createFile(with: "", at: dayDirectory.appending(path: "Day\(day)Sample.txt"))
+}
+
+func createNewYear(year: Int, at root: URL, setupDirectory: URL) {
+    
+    createYearContext(
+        year: year,
+        at: root,
+        setupDirectory: setupDirectory
+    )
+
+    (1 ... 25)
+        .forEach { day in
+            createDayContext(
+                day: day,
+                year: year,
+                at: sourcesDirectory,
+                setupDirectory: setupDirectory
+            )
+        }
+
+    let reminder = """
+    Remember to add the new year in:
+
+    - `Package.swift` for targets
+    - `AdventOfCode.swift` for imports
+    """
+
+    print(reminder)
+}
+
+func createSampleFiles(year: Int, at root: URL, setupDirectory: URL) {
+    let yearDirectory = root.appending(path: "AdventOfCode\(year)")
+    
+    (1 ... 25)
+        .forEach { day in
+            let dayDirectory = yearDirectory.appending(path: "Day\(day)")
+            createFile(with: "", at: dayDirectory.appending(path: "Day\(day)Sample.txt"))
+        }
+    
+    print("Added sample files to days in \(year)")
 }
 
 // MARK: Setup Current Year
 
-guard CommandLine.argc == 2 else {
+guard CommandLine.argc >= 2, CommandLine.argc < 4 else {
     error("Unexpected number of arguments")
     usage()
     exit(1)
@@ -76,27 +120,24 @@ guard let year = Int(CommandLine.arguments[1]) else {
 let setupDirectory = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
 let sourcesDirectory = setupDirectory.appending(path: "../Sources")
 
-createYearContext(
-    year: year,
-    at: sourcesDirectory,
-    setupDirectory: setupDirectory
-)
-
-(1 ... 25)
-    .forEach { day in
-        createDayContext(
-            day: day,
+// we want to add something to the year separately
+if CommandLine.argc > 2 {
+    switch CommandLine.arguments[2] {
+    case "sample":
+        createSampleFiles(
             year: year,
             at: sourcesDirectory,
             setupDirectory: setupDirectory
         )
+    default:
+        error("Unknown parameter: \(CommandLine.arguments[2])")
+        usage()
+        exit(1)
     }
-
-let reminder = """
-Remember to add the new year in:
-
-- `Package.swift` for targets
-- `AdventOfCode.swift` for imports
-"""
-
-print(reminder)
+} else {
+    createNewYear(
+        year: year,
+        at: sourcesDirectory,
+        setupDirectory: setupDirectory
+    )
+}
