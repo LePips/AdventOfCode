@@ -1,5 +1,5 @@
 struct Day6: Day {
-    
+
     func part1() -> CustomStringConvertible? {
         input()
             .lines[0]
@@ -8,7 +8,7 @@ struct Day6: Day {
             .first(where: { $0.element.asSet.count == 4 })
             .map { $0.offset + 4 }
     }
-    
+
     func part2() -> CustomStringConvertible? {
         input()
             .lines[0]

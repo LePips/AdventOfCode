@@ -1,9 +1,9 @@
 struct Day10: Day {
-    
+
     // clock, value, sum
     func part1() -> CustomStringConvertible? {
         nil
-//		input()
+        //		input()
 //            .lines
 //            .map {
 //                if $0 == "noop" {
@@ -17,8 +17,8 @@ struct Day10: Day {
 //                    partialResult.1 %
 //            }
     }
-    
+
     func part2() -> CustomStringConvertible? {
-		nil
+        nil
     }
 }

@@ -1,9 +1,9 @@
 struct Day3: Day {
-    
+
     func part1() -> CustomStringConvertible? {
-		let lines = input()
+        let lines = input()
             .lines
-        
+
         let numbers = lines
             .enumerated()
             .map { (x: $0.element.rangeMatches(for: "(\\d+)"), y: $0.offset) }
@@ -11,7 +11,7 @@ struct Day3: Day {
                 location.x.map { (xRange: $0.1, y: location.y, value: $0.0.asInt!) }
             }
             .flatMap { $0 }
-        
+
         return numbers
             .compactMap { (xRange: ClosedRange<Int>, y: Int, value: Int) -> Int? in
                 let hasSymbol = lines[Swift.max(0, y - 1) ... Swift.min(lines[0].count - 1, y + 1)]
@@ -20,18 +20,18 @@ struct Day3: Day {
                     .map(\.asArray)
                     .flatMap { $0 }
                     .contains(where: { !$0.isNumber && $0 != "." })
-                
+
                 guard hasSymbol else { return nil }
-                
+
                 return value
             }
             .sum()
     }
-    
+
     func part2() -> CustomStringConvertible? {
         let lines = input()
             .lines
-        
+
         let gears = lines
             .enumerated()
             .map { (x: $0.element.rangeMatches(for: "(\\*)"), y: $0.offset) }
@@ -39,7 +39,7 @@ struct Day3: Day {
                 location.x.map { (x: $0.1.lowerBound, y: location.y) }
             }
             .flatMap { $0 }
-        
+
         let numbers = lines
             .enumerated()
             .map { (x: $0.element.rangeMatches(for: "(\\d+)"), y: $0.offset) }
@@ -47,7 +47,7 @@ struct Day3: Day {
                 location.x.map { (xRange: $0.1, y: location.y, value: $0.0.asInt!) }
             }
             .flatMap { $0 }
-        
+
         let gearRatios = gears
             .map { gear -> (x: ClosedRange<Int>, y: ClosedRange<Int>) in
                 (
@@ -56,7 +56,7 @@ struct Day3: Day {
                 )
             }
             .map { frame in
-                numbers.filter { (xRange: ClosedRange<Int>, y: Int, value: Int) in
+                numbers.filter { (xRange: ClosedRange<Int>, y: Int, _: Int) in
                     frame.x.intersects(xRange) && frame.y.contains(y)
                 }
             }
@@ -64,7 +64,7 @@ struct Day3: Day {
             .map { $0.map(\.value) }
             .map { $0.reduce(1, *) }
             .sum()
-        
+
         return gearRatios
     }
 }

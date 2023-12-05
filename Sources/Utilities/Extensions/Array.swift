@@ -1,5 +1,5 @@
 public extension Array {
-    
+
     func appending(_ element: Element) -> Self {
         self + [element]
     }
@@ -19,22 +19,22 @@ public extension Array {
     func prepending(_ element: Element) -> Self {
         [element] + self
     }
-    
+
     func poppingLast(_ k: Int = 1) -> Self {
         guard k >= 1 else { fatalError("Array.poppingLast: k must be >= 1") }
         var copy = self
-        
-        return (0..<k)
+
+        return (0 ..< k)
             .compactMap { _ in copy.popLast() }
     }
-    
+
     func removingFirst(_ k: Int = 1) -> Self {
         guard k >= 1 else { fatalError("Array.removingFirst: k must be >= 1") }
         var copy = self
         copy.removeFirst(Swift.max(0, Swift.min(k, count - 1)))
         return copy
     }
-    
+
     func removingLast(_ k: Int = 1) -> Self {
         guard k >= 1 else { fatalError("Array.removingLast: k must be >= 1") }
         var copy = self
@@ -43,12 +43,12 @@ public extension Array {
     }
 }
 
-public extension Array where Element == Bool {
-    
+public extension [Bool] {
+
     func areAllTrue() -> Bool {
         allSatisfy { $0 }
     }
-    
+
     func areAllFalse() -> Bool {
         allSatisfy { !$0 }
     }

@@ -1,5 +1,8 @@
 #!/usr/bin/env swift
 
+// TODO: allow piecemeal creation
+// - sample files
+
 import Foundation
 
 // MARK: Utilities
@@ -22,17 +25,18 @@ func createFile(with contents: String, at url: URL) {
 
 func contents(at url: URL) -> String {
     guard let data = FileManager.default.contents(atPath: url.path),
-          let contents = String(data: data, encoding: .utf8) else {
+          let contents = String(data: data, encoding: .utf8)
+    else {
         error("Unable to read file data at: \(url.path)")
         exit(1)
     }
-    
+
     return contents
 }
 
 func createYearContext(year: Int, at root: URL, setupDirectory: URL) {
     let yearDirectory = root.appending(path: "AdventOfCode\(year)")
-    
+
     createDirectory(at: yearDirectory)
 
     let rawYearFile = contents(at: setupDirectory.appending(path: "Year_Template.swift"))
@@ -45,12 +49,12 @@ func createDayContext(day: Int, year: Int, at root: URL, setupDirectory: URL) {
     let dayDirectory = root
         .appending(path: "AdventOfCode\(year)")
         .appending(path: "Day\(day)")
-    
+
     createDirectory(at: dayDirectory)
-    
+
     let rawDayFile = contents(at: setupDirectory.appending(path: "Day_Template.swift"))
     let currentDayFile = rawDayFile.replacingOccurrences(of: "num", with: "\(day)")
-    
+
     createFile(with: currentDayFile, at: dayDirectory.appending(path: "Day\(day).swift"))
     createFile(with: "", at: dayDirectory.appending(path: "Day\(day).txt"))
 }
@@ -78,7 +82,7 @@ createYearContext(
     setupDirectory: setupDirectory
 )
 
-(1...25)
+(1 ... 25)
     .forEach { day in
         createDayContext(
             day: day,

@@ -1,10 +1,10 @@
 struct Day10: Day {
-    
+
     func part1() -> CustomStringConvertible? {
-		nil
+        nil
     }
-    
+
     func part2() -> CustomStringConvertible? {
-		nil
+        nil
     }
 }

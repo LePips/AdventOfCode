@@ -1,12 +1,12 @@
 struct Day1: Day {
-    
+
     func part1() -> CustomStringConvertible? {
         lines()
             .map { $0.filter(\.isNumber) }
             .map { Int("\($0.first!)\($0.last!)")! }
             .sum()
     }
-    
+
     enum WrittenDigit: Int, CaseIterable {
         case one = 1
         case two = 2
@@ -17,14 +17,14 @@ struct Day1: Day {
         case seven = 7
         case eight = 8
         case nine = 9
-        
+
         init(stringValue: String) {
-            
+
             if let i = Int(stringValue) {
                 self.init(rawValue: i)!
                 return
             }
-            
+
             switch stringValue {
             case "one": self.init(rawValue: 1)!
             case "two": self.init(rawValue: 2)!
@@ -38,31 +38,31 @@ struct Day1: Day {
             default: fatalError()
             }
         }
-        
+
         static let totalRegex: String = {
             let cases = allCases
                 .map { "\($0)" }
                 .joined(separator: "|")
-            
+
             return "(\(cases)|\\d)"
         }()
-        
+
         static let totalRegexReverse: String = {
             let cases = allCases
                 .map { "\($0)" }
-                .map { $0.reversed }
+                .map(\.reversed)
                 .joined(separator: "|")
-            
+
             return "(\(cases)|\\d)"
         }()
     }
-    
+
     func part2() -> CustomStringConvertible? {
         lines()
             .map {
                 [
                     $0.firstMatch(for: WrittenDigit.totalRegex)!,
-                    $0.reversed.firstMatch(for: WrittenDigit.totalRegexReverse)!.reversed
+                    $0.reversed.firstMatch(for: WrittenDigit.totalRegexReverse)!.reversed,
                 ]
             }
             .map { [$0.first!, $0.last!].map(WrittenDigit.init(stringValue:)) }

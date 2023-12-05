@@ -1,24 +1,24 @@
 struct Day3: Day {
-    
+
     var priorities: [Character: Int] {
         var a: [Character: Int] = [:]
-        
+
         String.alphabet
             .enumerated()
             .forEach { index, value in
                 a[value] = index + 1
             }
-        
+
         String.alphabet
             .uppercased()
             .enumerated()
             .forEach { index, value in
                 a[value] = index + 27
             }
-        
+
         return a
     }
-    
+
     func part1() -> CustomStringConvertible? {
         input()
             .lines
@@ -27,7 +27,7 @@ struct Day3: Day {
             .map { priorities[$0]! }
             .sum()
     }
-    
+
     func part2() -> CustomStringConvertible? {
         input()
             .lines
