@@ -32,11 +32,14 @@ struct Day6: Day {
                     .asInt
             }
         
+        let time = lines[0]
+        let distance = lines[1]
+        
         var t = 0
         
-        for i in 1 ..< lines[0] - 1 {
-            if i * (lines[0] - i) > lines[1] {
-                t += 1
+        for i in 1 ..< time - 1 {
+            if i * (time - i) > distance {
+                return time - 2 * i + 1
             }
         }
         
