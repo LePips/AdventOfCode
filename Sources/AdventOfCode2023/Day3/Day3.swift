@@ -57,7 +57,7 @@ struct Day3: Day {
             }
             .map { frame in
                 numbers.filter { (xRange: ClosedRange<Int>, y: Int, _: Int) in
-                    frame.x.intersects(xRange) && frame.y.contains(y)
+                    frame.x.overlaps(xRange) && frame.y.contains(y)
                 }
             }
             .filter { $0.count == 2 }

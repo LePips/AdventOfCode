@@ -53,3 +53,12 @@ public extension [Bool] {
         allSatisfy { !$0 }
     }
 }
+
+public extension [String] {
+
+    func trimmed() -> Self {
+        var copy = self
+        copy.trim(while: { $0.isEmpty })
+        return copy
+    }
+}
