@@ -10,11 +10,11 @@ func error(_ message: String) {
 
 func usage() {
     let message = """
-USAGE: setup.swift <year> [sample]
+    USAGE: setup.swift <year> [sample]
 
-SUBCOMMANDS:
-  sample              Create sample files for days in the year
-"""
+    SUBCOMMANDS:
+      sample              Create sample files for days in the year
+    """
     print(message)
 }
 
@@ -64,7 +64,7 @@ func createDayContext(day: Int, year: Int, at root: URL, setupDirectory: URL) {
 }
 
 func createNewYear(year: Int, at root: URL, setupDirectory: URL) {
-    
+
     createYearContext(
         year: year,
         at: root,
@@ -93,13 +93,13 @@ func createNewYear(year: Int, at root: URL, setupDirectory: URL) {
 
 func createSampleFiles(year: Int, at root: URL, setupDirectory: URL) {
     let yearDirectory = root.appending(path: "AdventOfCode\(year)")
-    
+
     (1 ... 25)
         .forEach { day in
             let dayDirectory = yearDirectory.appending(path: "Day\(day)")
             createFile(with: "", at: dayDirectory.appending(path: "Day\(day)Sample.txt"))
         }
-    
+
     print("Added sample files to days in \(year)")
 }
 
