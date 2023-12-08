@@ -3,7 +3,7 @@
 
 AdventRunner().run(
     year: 2023,
-    day: 7
+    day: 8
 )
 
 // MARK: Playground

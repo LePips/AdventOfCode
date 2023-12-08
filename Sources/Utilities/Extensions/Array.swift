@@ -43,6 +43,13 @@ public extension Array {
     }
 }
 
+public extension Array where Element: Equatable {
+
+    func allEqual(_ element: Element) -> Bool {
+        allSatisfy { $0 == element }
+    }
+}
+
 public extension [Bool] {
 
     func areAllTrue() -> Bool {
@@ -51,6 +58,62 @@ public extension [Bool] {
 
     func areAllFalse() -> Bool {
         allSatisfy { !$0 }
+    }
+}
+
+public extension [Int] {
+
+    func greatestCommonDivisor() -> Int {
+
+        guard count > 1 else { return 0 }
+
+        var r = self[0]
+
+        for i in 1 ..< count {
+            r = gcd(self[i], r)
+
+            if r == 1 {
+                return 1
+            }
+        }
+
+        return r
+    }
+
+    /// Finds the Least Common Multiple among self according to the Division Method
+    func leastCommonMultiple() -> Int {
+
+        var nums = self
+        var c = 1
+        var lcm = 1
+
+        while true {
+
+            if nums.allEqual(1) {
+                break
+            }
+
+            c = c.nextPrime()
+
+            while true {
+                var didDivide = false
+
+                for i in 0 ..< nums.count {
+                    if nums[i] != 1 && nums[i] % c == 0 {
+                        nums[i] = nums[i] / c
+                        didDivide = true
+                    }
+                }
+
+                if didDivide {
+                    lcm *= c
+                } else {
+                    break
+                }
+            }
+        }
+
+        return lcm
     }
 }
 
