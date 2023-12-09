@@ -12,7 +12,6 @@ struct Day1: Day {
     func part2() -> CustomStringConvertible? {
         let input = input().raw
 
-        let t = 1
         var l = 0
 
         for (i, c) in input.enumerated() {

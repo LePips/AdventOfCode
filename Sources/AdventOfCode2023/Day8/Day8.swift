@@ -73,7 +73,7 @@ struct Day8: Day {
             .keys
             .filter { $0.last! == "A" }
             .map(steps(_:))
-            .leastCommonMultiple()
+            .lcm()
 
         return lcm
     }

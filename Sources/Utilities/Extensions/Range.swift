@@ -1,6 +1,6 @@
 public extension ClosedRange {}
 
-public extension ClosedRange where Bound: Strideable, Bound.Stride == Int {
+public extension ClosedRange where Bound: Strideable, Bound.Stride: BinaryInteger {
 
     func contains(_ other: some Collection<Bound>) -> Bool {
         guard var current = other.first, contains(current) else { return false }
@@ -21,9 +21,9 @@ public extension ClosedRange where Bound: Strideable, Bound.Stride == Int {
     }
 }
 
-public extension ClosedRange where Bound == Int {
+public extension ClosedRange where Bound: BinaryInteger, Bound.Stride: SignedInteger {
 
-    init(start: Int, length: Int) {
+    init(start: Bound, length: Bound) {
         precondition(length > 0)
 
         self.init(
@@ -35,7 +35,7 @@ public extension ClosedRange where Bound == Int {
     }
 
     /// Returns subranges of self that do or don't overlap against another range
-    func ranges(against other: ClosedRange) -> (nonOverlapping: [Self], overlapping: [Self]) {
+    func ranges(against other: Self) -> (nonOverlapping: [Self], overlapping: [Self]) {
 
         var nonOverlapping: [Self] = []
         var overlapping: [Self] = []
@@ -43,8 +43,10 @@ public extension ClosedRange where Bound == Int {
         var current = self
 
         if lowerBound < other.lowerBound {
+            let boundCount = Bound(current.count)
+
             let length = Swift.min(
-                current.count,
+                boundCount,
                 other.lowerBound - lowerBound
             )
 
@@ -52,7 +54,7 @@ public extension ClosedRange where Bound == Int {
 
             nonOverlapping.append(preNonOverlapping)
 
-            let newLength = current.count - length
+            let newLength = boundCount - length
 
             if newLength <= 0 {
                 return (nonOverlapping, overlapping)
@@ -62,8 +64,10 @@ public extension ClosedRange where Bound == Int {
         }
 
         if current.lowerBound < other.upperBound {
+            let boundCount = Bound(current.count)
+
             let length = Swift.min(
-                current.count,
+                boundCount,
                 other.upperBound - current.lowerBound + 1
             )
 
@@ -71,7 +75,7 @@ public extension ClosedRange where Bound == Int {
 
             overlapping.append(overlappingRange)
 
-            let newLength = current.count - length
+            let newLength = boundCount - length
 
             if newLength <= 0 {
                 return (nonOverlapping, overlapping)
