@@ -18,7 +18,16 @@ public extension Day {
     }
 
     func matrix(_ file: String = #filePath) -> Matrix<Character> {
-        Matrix(rows: lines().map(\.asArray))
+        let input = Input(
+            filePath: file.replacingOccurrences(
+                of: ".swift",
+                with: ".txt"
+            )
+        )
+        .lines
+        .map(\.asArray)
+
+        return Matrix(rows: input)
     }
 
     func sampleInput(_ file: String = #filePath) -> Input {
@@ -38,5 +47,18 @@ public extension Day {
                 .appending(".txt")
         )
         .lines
+    }
+
+    func sampleMatrix(_ file: String = #filePath) -> Matrix<Character> {
+        let input = Input(
+            filePath: file
+                .split(separator: ".")[0]
+                .appending("Sample")
+                .appending(".txt")
+        )
+        .lines
+        .map(\.asArray)
+
+        return Matrix(rows: input)
     }
 }

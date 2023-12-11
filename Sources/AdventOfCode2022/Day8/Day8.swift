@@ -35,7 +35,7 @@ struct Day8: Day {
         let matrix = forestMatrix()
 
         return (0 ..< matrix.area)
-            .map { matrix.value(at: $0) }
+            .map { matrix[$0] }
             .enumerated()
             .reduce(0) { partialResult, pair in
                 let rowI = pair.offset / matrix.width
@@ -57,7 +57,7 @@ struct Day8: Day {
         let matrix = forestMatrix()
 
         return (0 ..< matrix.area)
-            .map { matrix.value(at: $0) }
+            .map { matrix[$0] }
             .enumerated()
             .map { pair in
 

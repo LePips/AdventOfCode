@@ -1,3 +1,6 @@
+// TODO: right name?
+public typealias Coordinate<T: BinaryInteger> = (x: T, y: T)
+
 @inlinable
 public func pow<T: BinaryInteger>(_ x: T, _ y: T) -> T {
     T(pow(Float(x), Float(y)))
@@ -31,7 +34,25 @@ func _lcm<T: BinaryInteger>(_ x: T, _ y: T) -> T {
     return x * (y / z)
 }
 
+@inlinable
+public func manhattanDistance<T: BinaryInteger>(x1: T, y1: T, x2: T, y2: T) -> T {
+    T((x1 - x2).magnitude + T(y1 - y2).magnitude)
+}
+
+@inlinable
+public func manhattanDistance<T: BinaryInteger>(_ a: Coordinate<T>, _ b: Coordinate<T>) -> T {
+    T((a.x - b.x).magnitude + T(a.y - b.y).magnitude)
+}
+
 public extension BinaryInteger {
+
+    var isEven: Bool {
+        (self & 1) == 0
+    }
+
+    var isOdd: Bool {
+        !isEven
+    }
 
     var isPrime: Bool {
         guard self != 2 else { return true }
@@ -42,10 +63,14 @@ public extension BinaryInteger {
     }
 
     func nextPrime() -> Self {
-        var n = self + 1
+        var n: Self = if isEven {
+            self + 1
+        } else {
+            self + 2
+        }
 
         while !n.isPrime {
-            n += 1
+            n += 2
         }
 
         return n

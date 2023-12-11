@@ -1,5 +1,3 @@
-public extension ClosedRange {}
-
 public extension ClosedRange where Bound: Strideable, Bound.Stride: BinaryInteger {
 
     func contains(_ other: some Collection<Bound>) -> Bool {

@@ -43,24 +43,6 @@ public extension Array {
     }
 }
 
-public extension Array where Element: Equatable {
-
-    func allEqual(_ element: Element) -> Bool {
-        allSatisfy { $0 == element }
-    }
-}
-
-public extension [Bool] {
-
-    func areAllTrue() -> Bool {
-        allSatisfy { $0 }
-    }
-
-    func areAllFalse() -> Bool {
-        allSatisfy { !$0 }
-    }
-}
-
 public extension [String] {
 
     func trimmed() -> Self {

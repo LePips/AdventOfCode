@@ -9,10 +9,14 @@ public extension Sequence {
     }
 }
 
-public extension Sequence where Element: Hashable {
+public extension Sequence<Bool> {
 
-    var asSet: Set<Element> {
-        Set(self)
+    func areAllTrue() -> Bool {
+        allSatisfy { $0 }
+    }
+
+    func areAllFalse() -> Bool {
+        allSatisfy { !$0 }
     }
 }
 
@@ -53,6 +57,20 @@ public extension Sequence where Element: BinaryInteger {
 
     func lcm() -> Element {
         reduce(1, _lcm(_:_:))
+    }
+}
+
+public extension Sequence where Element: Equatable {
+
+    func allEqual(_ element: Element) -> Bool {
+        allSatisfy { $0 == element }
+    }
+}
+
+public extension Sequence where Element: Hashable {
+
+    var asSet: Set<Element> {
+        Set(self)
     }
 }
 
