@@ -52,7 +52,12 @@ public class Matrix<Element: CustomStringConvertible> {
     }
 
     public subscript(i: Int) -> Element {
-        rows[i / width][i % width]
+        get {
+            rows[i / width][i % width]
+        }
+        set(newValue) {
+            rows[i / width][i % width] = newValue
+        }
     }
 
     public func firstLocation(where predicate: (Element) -> Bool) -> Coordinate<Int>? {
