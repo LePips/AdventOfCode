@@ -1,5 +1,15 @@
 public extension Array {
 
+    func multiplied(by amount: Int, separator: Element? = nil) -> Self {
+        guard amount > 1 else { return self }
+
+        if let separator {
+            return self + [separator] + multiplied(by: amount - 1, separator: separator)
+        } else {
+            return self + multiplied(by: amount - 1, separator: separator)
+        }
+    }
+
     func appending(_ element: Element) -> Self {
         self + [element]
     }
@@ -31,7 +41,7 @@ public extension Array {
     func removingFirst(_ k: Int = 1) -> Self {
         guard k >= 1 else { fatalError("Array.removingFirst: k must be >= 1") }
         var copy = self
-        copy.removeFirst(Swift.max(0, Swift.min(k, count - 1)))
+        copy.removeFirst(k)
         return copy
     }
 
