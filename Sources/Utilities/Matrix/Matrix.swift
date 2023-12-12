@@ -64,7 +64,7 @@ public class Matrix<Element: CustomStringConvertible> {
         guard let y = rows.firstIndex(where: { $0.contains(where: predicate) }),
               let x = rows[y].firstIndex(where: predicate) else { return nil }
 
-        return (x, y)
+        return .init(x: x, y: y)
     }
 
     public func transposed() -> Matrix<Element> {
@@ -84,7 +84,7 @@ public class Matrix<Element: CustomStringConvertible> {
             .map { row in
                 row
                     .element
-                    .map { (x: $0.offset, y: row.offset) }
+                    .map { Coordinate(x: $0.offset, y: row.offset) }
             }
             .flatMap { $0 }
     }

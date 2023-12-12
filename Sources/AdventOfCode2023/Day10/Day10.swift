@@ -1,6 +1,6 @@
 struct Day10: Day {
 
-    func nextPipeLocations(from location: (x: Int, y: Int), input: Matrix<Character>) -> [(x: Int, y: Int)] {
+    func nextPipeLocations(from location: Coordinate<Int>, input: Matrix<Character>) -> [Coordinate<Int>] {
         let x = location.x
         let y = location.y
 
@@ -42,11 +42,11 @@ struct Day10: Day {
             }
         }
 
-        return t
+        return t.map { Coordinate(x: $0.0, y: $0.1) }
     }
 
     func traverse(
-        from location: (x: Int, y: Int),
+        from location: Coordinate<Int>,
         step: Int,
         in input: Matrix<Character>,
         steps: inout Matrix<Int>
@@ -71,7 +71,7 @@ struct Day10: Day {
 
     func stepThroughLoop(
         input: Matrix<Character>,
-        startLocation: (x: Int, y: Int),
+        startLocation: Coordinate<Int>,
         steps: inout Matrix<Int>
     ) {
         steps[startLocation.x, startLocation.y] = 0
@@ -98,7 +98,7 @@ struct Day10: Day {
         return (t + 2) / 2
     }
 
-    func possiblePipe(from a: (x: Int, y: Int), to b: (x: Int, y: Int)) -> Set<Character> {
+    func possiblePipe(from a: Coordinate<Int>, to b: Coordinate<Int>) -> Set<Character> {
         if a.x == b.x {
             if a.y - b.y == 1 {
                 return ["|", "L", "J"]
@@ -120,7 +120,7 @@ struct Day10: Day {
         let startNextLocations = nextPipeLocations(from: start, input: input)
 
         let replaceStart = startNextLocations
-            .map { possiblePipe(from: (start.x, start.y), to: $0) }
+            .map { possiblePipe(from: start, to: $0) }
             .reduce(into: ["-", "7", "J", "F", "L"].asSet) { partialResult, s in
                 partialResult = partialResult.intersection(s)
             }

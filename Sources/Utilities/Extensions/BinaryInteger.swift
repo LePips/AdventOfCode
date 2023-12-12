@@ -1,5 +1,13 @@
 // TODO: right name?
-public typealias Coordinate<T: BinaryInteger> = (x: T, y: T)
+public struct Coordinate<T: BinaryInteger>: Hashable {
+    public let x: T
+    public let y: T
+
+    public init(x: T, y: T) {
+        self.x = x
+        self.y = y
+    }
+}
 
 @inlinable
 public func pow<T: BinaryInteger>(_ x: T, _ y: T) -> T {

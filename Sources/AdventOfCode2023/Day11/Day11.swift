@@ -18,7 +18,7 @@ struct Day11: Day {
                     }
                 }
 
-                return (x: nx, y: ny)
+                return Coordinate(x: nx, y: ny)
             }
 
         return galaxies
