@@ -8,7 +8,7 @@ struct Day12: Day {
     func f(
         _ s: [Character], // proposed string
         _ gs: [Int], // rest groups,
-        _ memo: inout [Key: Int] // s: [gs: count]
+        _ memo: inout [Key: Int]
     ) -> Int {
 
         if let c = memo[Key(sh: s.hashValue, gs: gs.hashValue)] {
