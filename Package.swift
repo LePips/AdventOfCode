@@ -30,6 +30,16 @@ let package = Package(
                 .product(name: "Algorithms", package: "swift-algorithms"),
             ]
         ),
+        .plugin(
+            name: "Setup",
+            capability: .command(
+                intent: .custom(verb: "setup", description: "Creates the necessary files for an Advent of Code year"),
+                permissions: [
+                    .writeToPackageDirectory(reason: "Creates the necessary files for an Advent of Code year")
+                ]
+            ),
+            dependencies: []
+        ),
         .target(
             name: "AdventOfCode2015",
             dependencies: ["Utilities"]
