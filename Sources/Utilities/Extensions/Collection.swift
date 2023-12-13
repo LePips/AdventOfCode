@@ -12,6 +12,18 @@ public extension Collection {
         indices.contains(index) ? self[index] : nil
     }
 
+    func count(where condition: (Element) -> Bool) -> Int {
+        var t = 0
+
+        for e in self {
+            if condition(e) {
+                t += 1
+            }
+        }
+
+        return t
+    }
+
     func grouped(by keyPath: KeyPath<Element, some Hashable>) -> [[Element]] {
         grouping(by: keyPath)
             .values
@@ -33,6 +45,15 @@ public extension Collection where Element: Comparable {
 }
 
 public extension Collection where Element: Equatable {
+
+    func differences(against other: some Collection<Element>) -> Int {
+        let z = zip(self, other).asArray
+        var t = Swift.max(count, other.count) - z.count
+
+        t += z.count(where: { $0 != $1 })
+
+        return t
+    }
 
     func split(on boundary: Element) -> [SubSequence] {
         split(omittingEmptySubsequences: true, whereSeparator: { $0 == boundary })

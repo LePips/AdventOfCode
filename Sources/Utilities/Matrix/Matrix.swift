@@ -5,6 +5,13 @@ public class Matrix<Element: CustomStringConvertible> {
 
     public private(set) var rows: [[Element]]
 
+    public var columns: [[Element]] {
+        (0 ..< width)
+            .map {
+                column($0)
+            }
+    }
+
     var isEmpty: Bool {
         area == 0
     }
@@ -71,6 +78,22 @@ public class Matrix<Element: CustomStringConvertible> {
         let newRows = (0 ..< width)
             .map {
                 column($0)
+            }
+
+        return Matrix(rows: newRows)
+    }
+
+    public func yFlipped() -> Matrix<Element> {
+        let columns = (0 ..< width)
+            .map {
+                column($0)
+            }
+            .reversed()
+            .asArray
+
+        let newRows = (0 ..< height)
+            .map { i in
+                columns.map { $0[i] }
             }
 
         return Matrix(rows: newRows)
