@@ -119,6 +119,28 @@ public extension Matrix {
         let rows = Array(repeating: Array(repeating: value, count: width), count: height)
         self.init(rows: rows)
     }
+
+    convenience init(columns: [[Element]]) {
+
+        guard let f = columns.first else {
+            self.init(rows: [])
+            return
+        }
+
+        var rows: [[Element]] = []
+
+        for i in 0 ..< f.count {
+            var t: [Element] = []
+
+            for column in columns {
+                t.append(column[i])
+            }
+
+            rows.append(t)
+        }
+
+        self.init(rows: rows)
+    }
 }
 
 public extension Matrix where Element: Comparable {
