@@ -54,6 +54,10 @@ public func manhattanDistance<T: BinaryInteger>(_ a: Coordinate<T>, _ b: Coordin
 
 public extension BinaryInteger {
 
+    var asInt: Int {
+        Int(self)
+    }
+
     var isEven: Bool {
         (self & 1) == 0
     }
