@@ -58,6 +58,15 @@ public class Matrix<Element: CustomStringConvertible> {
         }
     }
 
+    public subscript(c: Coordinate<Int>) -> Element {
+        get {
+            rows[c.y][c.x]
+        }
+        set(newValue) {
+            rows[c.y][c.x] = newValue
+        }
+    }
+
     public subscript(i: Int) -> Element {
         get {
             rows[i / width][i % width]
