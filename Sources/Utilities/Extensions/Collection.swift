@@ -33,6 +33,20 @@ public extension Collection {
     func grouping<Value: Hashable>(by keyPath: KeyPath<Element, Value>) -> [Value: [Element]] {
         Dictionary(grouping: self, by: { $0[keyPath: keyPath] })
     }
+    
+    func max(using keyPath: KeyPath<Element, some Comparable>) -> Element? {
+        self.max(by: { $0[keyPath: keyPath] < $1[keyPath: keyPath] })
+    }
+    
+    func min(using keyPath: KeyPath<Element, some Comparable>) -> Element? {
+        self.min(by: { $0[keyPath: keyPath] < $1[keyPath: keyPath] })
+    }
+    
+    func filter<Value: Equatable>(by keyPath: KeyPath<Element, Value>, against other: [Element]) -> [Element] {
+        filter { x in
+            other.contains(where: { x[keyPath: keyPath] == $0[keyPath: keyPath] })
+        }
+    }
 }
 
 public extension Collection where Element: Comparable {
@@ -57,6 +71,12 @@ public extension Collection where Element: Equatable {
 
     func split(on boundary: Element) -> [SubSequence] {
         split(omittingEmptySubsequences: true, whereSeparator: { $0 == boundary })
+    }
+    
+    func filter(against other: [Element]) -> [Element] {
+        filter { x in
+            other.contains(where: { x == $0 })
+        }
     }
 }
 

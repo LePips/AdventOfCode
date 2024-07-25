@@ -30,6 +30,7 @@ public extension Array {
         [element] + self
     }
 
+    // TODO: change to preconditions
     func poppingLast(_ k: Int = 1) -> Self {
         guard k >= 1 else { fatalError("Array.poppingLast: k must be >= 1") }
         var copy = self

@@ -1,4 +1,5 @@
 // TODO: right name?
+// TODO: change to just an Int?
 public struct Coordinate<T: BinaryInteger>: Hashable {
     public let x: T
     public let y: T

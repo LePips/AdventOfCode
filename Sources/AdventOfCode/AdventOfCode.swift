@@ -2,7 +2,7 @@ import AdventOfCode2015
 import AdventOfCode2022
 import AdventOfCode2023
 
-struct _AdventOfCode {
+enum _AdventOfCode {
 
     static var years: [any Year] = [
         _AdventOfCode2015(),

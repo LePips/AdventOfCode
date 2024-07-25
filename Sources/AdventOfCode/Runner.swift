@@ -3,7 +3,12 @@ import Utilities
 
 struct AdventRunner {
 
-    func run(year: Int, day: Int) {
+    func run(
+        year: Int,
+        day: Int,
+        runPart1: Bool = false,
+        runPart2: Bool = false
+    ) {
 
         print(header(year: year, day: day))
 
@@ -11,8 +16,13 @@ struct AdventRunner {
             .year(year)
             .day(day)
 
-        part1(of: day)
-        part2(of: day)
+        if runPart1 {
+            part1(of: day)
+        }
+        
+        if runPart2 {
+            part2(of: day)
+        }
     }
 
     private func part1(of day: any Day) {

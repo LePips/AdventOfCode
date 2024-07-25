@@ -71,15 +71,14 @@ func createNewYear(year: Int, at root: URL, setupDirectory: URL) {
         setupDirectory: setupDirectory
     )
 
-    (1 ... 25)
-        .forEach { day in
-            createDayContext(
-                day: day,
-                year: year,
-                at: sourcesDirectory,
-                setupDirectory: setupDirectory
-            )
-        }
+    for day in 1 ... 25 {
+        createDayContext(
+            day: day,
+            year: year,
+            at: sourcesDirectory,
+            setupDirectory: setupDirectory
+        )
+    }
 
     let reminder = """
     Remember to add the new year in:
@@ -94,11 +93,10 @@ func createNewYear(year: Int, at root: URL, setupDirectory: URL) {
 func createSampleFiles(year: Int, at root: URL, setupDirectory: URL) {
     let yearDirectory = root.appending(path: "AdventOfCode\(year)")
 
-    (1 ... 25)
-        .forEach { day in
-            let dayDirectory = yearDirectory.appending(path: "Day\(day)")
-            createFile(with: "", at: dayDirectory.appending(path: "Day\(day)Sample.txt"))
-        }
+    for day in 1 ... 25 {
+        let dayDirectory = yearDirectory.appending(path: "Day\(day)")
+        createFile(with: "", at: dayDirectory.appending(path: "Day\(day)Sample.txt"))
+    }
 
     print("Added sample files to days in \(year)")
 }

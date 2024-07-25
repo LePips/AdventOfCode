@@ -1,6 +1,7 @@
 public extension String {
 
     static let alphabet = "abcdefghijklmnopqrstuvwxyz"
+    static let vowels = "aeiou"
 
     static let empty = ""
 

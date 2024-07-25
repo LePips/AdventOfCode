@@ -14,11 +14,12 @@ struct Day3: Day {
 
         return numbers
             .compactMap { (xRange: ClosedRange<Int>, y: Int, value: Int) -> Int? in
-                let hasSymbol = lines[Swift.max(0, y - 1) ... Swift.min(lines[0].count - 1, y + 1)]
+                let a = lines[Swift.max(0, y - 1) ... Swift.min(lines[0].count - 1, y + 1)]
                     .map(\.asArray)
                     .map { $0[Swift.max(0, xRange.lowerBound - 1) ... Swift.min(lines[0].count - 1, xRange.upperBound)] }
                     .map(\.asArray)
-                    .flatMap { $0 }
+                
+                let hasSymbol = a.flatMap { $0 }
                     .contains(where: { !$0.isNumber && $0 != "." })
 
                 guard hasSymbol else { return nil }
