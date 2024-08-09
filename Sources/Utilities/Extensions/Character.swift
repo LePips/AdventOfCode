@@ -7,4 +7,8 @@ public extension Character {
     var asString: String {
         String(self)
     }
+    
+    init(asciiValue: UInt8) {
+        self.init(UnicodeScalar(asciiValue))
+    }
 }
