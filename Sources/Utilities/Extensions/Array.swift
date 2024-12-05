@@ -62,3 +62,24 @@ public extension [String] {
         return copy
     }
 }
+
+public extension Array where Element: RandomAccessCollection, Element: Equatable {
+    
+    func split(on: Element) -> [[Element]] {
+        var result: [[Element]] = []
+        var current: [Element] = []
+        
+        for element in self {
+            if element == on {
+                result.append(current)
+                current = []
+            } else {
+                current.append(element)
+            }
+        }
+        
+        result.append(current)
+        
+        return result
+    }
+}

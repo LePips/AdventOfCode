@@ -120,6 +120,11 @@ public class Matrix<Element: CustomStringConvertible> {
             }
             .flatMap { $0 }
     }
+    
+    public func contains(c: Coordinate<Int>) -> Bool {
+        c.x >= 0 && c.y >= 0
+            && c.x < width && c.y < height
+    }
 }
 
 public extension Matrix {

@@ -81,6 +81,10 @@ public extension Collection where Element: Equatable {
 }
 
 public extension Collection where Element: Hashable {
+    
+    func counted() -> [Element: Int] {
+        reduce(into: [:]) { $0[$1, default: 0] += 1 }
+    }
 
     func grouped() -> [[Element]] {
         grouping(by: \.self)

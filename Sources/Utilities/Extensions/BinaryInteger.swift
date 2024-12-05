@@ -10,6 +10,13 @@ public struct Coordinate<T: BinaryInteger>: Hashable {
     }
 }
 
+extension Coordinate {
+    
+    static func + (lhs: Coordinate<T>, rhs: Coordinate<T>) -> Coordinate<T> {
+        Coordinate(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
+}
+
 @inlinable
 public func pow<T: BinaryInteger>(_ x: T, _ y: T) -> T {
     T(pow(Float(x), Float(y)))

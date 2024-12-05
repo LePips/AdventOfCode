@@ -23,7 +23,9 @@ let package = Package(
                 "AdventOfCode2015",
                 "AdventOfCode2022",
                 "AdventOfCode2023",
-            ]
+                "AdventOfCode2024",
+            ],
+            swiftSettings: [.unsafeFlags(["-enable-bare-slash-regex"])]
         ),
         .target(
             name: "Utilities",
@@ -34,7 +36,8 @@ let package = Package(
         ),
         .target(
             name: "AdventOfCode2015",
-            dependencies: ["Utilities"]
+            dependencies: ["Utilities"],
+            swiftSettings: [.unsafeFlags(["-enable-bare-slash-regex"])]
         ),
         .target(
             name: "AdventOfCode2022",
@@ -43,6 +46,11 @@ let package = Package(
         .target(
             name: "AdventOfCode2023",
             dependencies: ["Utilities"]
+        ),
+        .target(
+            name: "AdventOfCode2024",
+            dependencies: ["Utilities"],
+            swiftSettings: [.unsafeFlags(["-enable-bare-slash-regex"])]
         ),
     ]
 )
