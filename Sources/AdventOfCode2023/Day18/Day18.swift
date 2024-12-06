@@ -32,7 +32,7 @@ struct Day18: Day {
             .reduce(into: [Coordinate(x: 0, y: 0)]) { partialResult, input in
                 let s = input[1].asInt!
                 
-                var t: [Coordinate<Int>] = [partialResult.last!]
+                var t: [Coordinate] = [partialResult.last!]
                 
                 switch input[0] {
                 case "U":

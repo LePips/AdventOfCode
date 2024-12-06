@@ -16,7 +16,7 @@ struct Day4: Day {
         let xs = m
             .locations(where: { $0 == "X" })
         
-        func search(_ c: Coordinate<Int>, _ w: String, _ di: Coordinate<Int>) -> Bool {
+        func search(_ c: Coordinate, _ w: String, _ di: Coordinate) -> Bool {
         
             guard w.isNotEmpty else {
                 return true
@@ -55,7 +55,7 @@ struct Day4: Day {
         let xs = m
             .locations(where: { $0 == "A" })
         
-        func search(_ c: Coordinate<Int>) -> Bool {
+        func search(_ c: Coordinate) -> Bool {
             let points = dis.map { Coordinate(x: c.x + $0.x, y: c.y + $0.y) }
             
             guard points.allSatisfy({ m.contains(c: $0) }) else { return false }

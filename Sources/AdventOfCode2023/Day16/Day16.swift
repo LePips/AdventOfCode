@@ -1,12 +1,12 @@
 struct Day16: Day {
 
     struct Key: Hashable {
-        let c: Coordinate<Int>
+        let c: Coordinate
         let d: Int
     }
 
     func f(
-        _ c: Coordinate<Int>,
+        _ c: Coordinate,
         _ g: Matrix<Character>,
         _ d: Int, // 0 north, clockwise
         _ e: inout Set<Key>
@@ -48,7 +48,7 @@ struct Day16: Day {
         }
     }
 
-    func t(_ c: Coordinate<Int>, _ d: Int, _ g: Matrix<Character>) -> Int {
+    func t(_ c: Coordinate, _ d: Int, _ g: Matrix<Character>) -> Int {
         var e: Set<Key> = []
 
         f(c, g, d, &e)

@@ -4,7 +4,7 @@ struct Day3: Day {
         let moves = lines()[0]
             .asArray
 
-        var t: Set<Coordinate<Int>> = []
+        var t: Set<Coordinate> = []
         
         t.insert(.init(x: 0, y: 0))
         
@@ -34,7 +34,7 @@ struct Day3: Day {
         let moves = lines()[0]
             .asArray
 
-        var t: Set<Coordinate<Int>> = []
+        var t: Set<Coordinate> = []
         
         var sx = 0
         var sy = 0

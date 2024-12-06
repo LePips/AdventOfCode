@@ -12,7 +12,7 @@ public class Matrix<Element: CustomStringConvertible> {
             }
     }
 
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         area == 0
     }
 
@@ -58,7 +58,7 @@ public class Matrix<Element: CustomStringConvertible> {
         }
     }
 
-    public subscript(c: Coordinate<Int>) -> Element {
+    public subscript(c: Coordinate) -> Element {
         get {
             rows[c.y][c.x]
         }
@@ -76,7 +76,7 @@ public class Matrix<Element: CustomStringConvertible> {
         }
     }
 
-    public func firstLocation(where predicate: (Element) -> Bool) -> Coordinate<Int>? {
+    public func firstLocation(where predicate: (Element) -> Bool) -> Coordinate? {
         guard let y = rows.firstIndex(where: { $0.contains(where: predicate) }),
               let x = rows[y].firstIndex(where: predicate) else { return nil }
 
@@ -108,7 +108,7 @@ public class Matrix<Element: CustomStringConvertible> {
         return Matrix(rows: newRows)
     }
 
-    public func locations(where predicate: (Element) -> Bool) -> [Coordinate<Int>] {
+    public func locations(where predicate: (Element) -> Bool) -> [Coordinate] {
         rows
             .map { $0.enumerated() } // x
             .map { $0.filter { predicate($0.element) } }
@@ -121,9 +121,15 @@ public class Matrix<Element: CustomStringConvertible> {
             .flatMap { $0 }
     }
     
-    public func contains(c: Coordinate<Int>) -> Bool {
+    public func contains(c: Coordinate) -> Bool {
         c.x >= 0 && c.y >= 0
             && c.x < width && c.y < height
+    }
+    
+    public func count(where predicate: (Element) -> Bool) -> Int {
+        rows
+            .map { $0.count(where: predicate) }
+            .sum()
     }
 }
 
@@ -163,6 +169,32 @@ public extension Matrix where Element: Comparable {
         rows
             .compactMap { $0.max() }
             .max()
+    }
+    
+    func min() -> Element? {
+        rows
+            .compactMap { $0.min() }
+            .min()
+    }
+}
+
+public extension Matrix where Element: Equatable {
+    
+    func firstLocation(of element: Element) -> Coordinate? {
+        firstLocation(where: { $0 == element })
+    }
+    
+    func count(of element: Element) -> Int {
+        count(where: { $0 == element })
+    }
+}
+
+public extension Matrix where Element: Hashable {
+    
+    func counts() -> [Element: Int] {
+        rows
+            .flatMap { $0 }
+            .counted()
     }
 }
 

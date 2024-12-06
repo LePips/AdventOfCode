@@ -24,7 +24,7 @@ struct Day11: Day {
         return galaxies
             .enumerated()
             .map {
-                var t: [(Coordinate<Int>, Coordinate<Int>)] = []
+                var t: [(Coordinate, Coordinate)] = []
 
                 for i in $0.offset + 1 ..< galaxies.count {
                     t.append(($0.element, galaxies[i]))

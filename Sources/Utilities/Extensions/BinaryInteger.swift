@@ -1,19 +1,92 @@
-// TODO: right name?
-// TODO: change to just an Int?
-public struct Coordinate<T: BinaryInteger>: Hashable {
-    public let x: T
-    public let y: T
+public struct Coordinate: Hashable {
+    public let x: Int
+    public let y: Int
 
-    public init(x: T, y: T) {
+    public init(x: Int, y: Int) {
         self.x = x
         self.y = y
     }
 }
 
-extension Coordinate {
+public extension Coordinate {
     
-    static func + (lhs: Coordinate<T>, rhs: Coordinate<T>) -> Coordinate<T> {
+    static func + (lhs: Coordinate, rhs: Coordinate) -> Coordinate {
         Coordinate(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
+    
+    static func + (lhs: Coordinate, rhs: Direction) -> Coordinate {
+        lhs + rhs.coordinate
+    }
+}
+
+public struct CoordinateAndDirection: Hashable {
+    
+    public var coordinate: Coordinate
+    public var direction: Direction
+    
+    public init(coordinate: Coordinate, direction: Direction) {
+        self.coordinate = coordinate
+        self.direction = direction
+    }
+}
+
+public enum Direction: Hashable {
+    
+    case up
+    case down
+    case left
+    case right
+    
+    public var coordinate: Coordinate {
+        switch self {
+        case .up:
+            return Coordinate(x: 0, y: -1)
+        case .down:
+            return Coordinate(x: 0, y: 1)
+        case .left:
+            return Coordinate(x: -1, y: 0)
+        case .right:
+            return Coordinate(x: 1, y: 0)
+        }
+    }
+    
+    public var rotated90: Direction {
+        switch self {
+        case .up:
+            return .right
+        case .down:
+            return .left
+        case .left:
+            return .up
+        case .right:
+            return .down
+        }
+    }
+    
+    public var rotated180: Direction {
+        switch self {
+        case .up:
+            return .down
+        case .down:
+            return .up
+        case .left:
+            return .right
+        case .right:
+            return .left
+        }
+    }
+    
+    public var rotated270: Direction {
+        switch self {
+        case .up:
+            return .left
+        case .down:
+            return .right
+        case .left:
+            return .down
+        case .right:
+            return .up
+        }
     }
 }
 
@@ -56,8 +129,8 @@ public func manhattanDistance<T: BinaryInteger>(x1: T, y1: T, x2: T, y2: T) -> T
 }
 
 @inlinable
-public func manhattanDistance<T: BinaryInteger>(_ a: Coordinate<T>, _ b: Coordinate<T>) -> T {
-    T((a.x - b.x).magnitude + T(a.y - b.y).magnitude)
+public func manhattanDistance(_ a: Coordinate, _ b: Coordinate) -> Int {
+    Int((a.x - b.x).magnitude + Int(a.y - b.y).magnitude)
 }
 
 public extension BinaryInteger {
