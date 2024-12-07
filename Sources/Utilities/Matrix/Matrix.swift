@@ -131,6 +131,10 @@ public class Matrix<Element: CustomStringConvertible> {
             .map { $0.count(where: predicate) }
             .sum()
     }
+    
+    public func map<T>(_ transform: (Element) -> T) -> Matrix<T> {
+        Matrix<T>(rows: rows.map { $0.map(transform) })
+    }
 }
 
 public extension Matrix {

@@ -59,9 +59,9 @@ struct Day18: Day {
             }
             .asSet
         
-        let minX = coordinates.min(using: \.x)!
+//        let minX = coordinates.min(using: \.x)!
         let maxX = coordinates.max(using: \.x)!
-        let minY = coordinates.min(using: \.y)!
+//        let minY = coordinates.min(using: \.y)!
         let maxY = coordinates.max(using: \.y)!
         
         let rows = Array(repeating: Array(repeating: ".", count: maxX.x + 1), count: maxY.y + 1)

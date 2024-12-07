@@ -5,7 +5,7 @@ struct Day1: Day {
             .lines
             .split(on: .empty)
             .map { $0.asInts.sum() }
-            .max()[0]
+            .max()
     }
 
     func part2() -> CustomStringConvertible? {
@@ -13,7 +13,7 @@ struct Day1: Day {
             .lines
             .split(on: .empty)
             .map { $0.asInts.sum() }
-            .max(3)
+            .max(count: 3)
             .sum()
     }
 }

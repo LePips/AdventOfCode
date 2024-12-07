@@ -13,6 +13,7 @@ public extension String {
         components(separatedBy: substring).count - 1
     }
 
+    @available(*, deprecated, message: "Use native bare slash regex instead")
     func matches(for regex: String) -> [String] {
         do {
             let regex = try NSRegularExpression(pattern: regex)

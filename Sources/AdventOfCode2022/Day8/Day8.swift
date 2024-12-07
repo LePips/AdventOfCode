@@ -4,10 +4,6 @@ struct Day8: Day {
         eyeline.allSatisfy { $0 < value }
     }
 
-    func forestMatrix() -> Matrix<Int> {
-        Matrix(rows: input().lines.map { $0.asArray.compactMap(\.asInt) })
-    }
-
     func visibleTreeCount(along eyeline: ArraySlice<Int>, value: Int) -> Int {
         visibleTreeCount(along: eyeline.asArray, value: value)
     }
@@ -32,7 +28,8 @@ struct Day8: Day {
     }
 
     func part1() -> CustomStringConvertible? {
-        let matrix = forestMatrix()
+        let matrix = matrix()
+            .map(\.asInt!)
 
         return (0 ..< matrix.area)
             .map { matrix[$0] }
@@ -54,9 +51,10 @@ struct Day8: Day {
     }
 
     func part2() -> CustomStringConvertible? {
-        let matrix = forestMatrix()
+        let matrix = matrix()
+            .map(\.asInt!)
 
-        return (0 ..< matrix.area)
+        let t = (0 ..< matrix.area)
             .map { matrix[$0] }
             .enumerated()
             .map { pair in
@@ -72,6 +70,7 @@ struct Day8: Day {
                     visibleTreeCount(along: column[0 ..< rowI].reversed(), value: pair.element) *
                     visibleTreeCount(along: column[rowI + 1 ..< matrix.height], value: pair.element)
             }
-            .max()
+        
+        return t.max()!
     }
 }

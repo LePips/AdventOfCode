@@ -49,15 +49,6 @@ public extension Collection {
     }
 }
 
-public extension Collection where Element: Comparable {
-
-    // TODO: move to swift-algorithms implementation
-    func max(_ amount: Int = 1) -> [Element] {
-        sorted()[(count - amount)...]
-            .asArray
-    }
-}
-
 public extension Collection where Element: Equatable {
 
     func differences(against other: some Collection<Element>) -> Int {
@@ -77,6 +68,14 @@ public extension Collection where Element: Equatable {
         filter { x in
             other.contains(where: { x == $0 })
         }
+    }
+    
+    func keep(ifEqualTo element: Element) -> [Element] {
+        filter { $0 == element }
+    }
+    
+    func filterOut(ifEqualTo element: Element) -> [Element] {
+        filter { $0 != element }
     }
 }
 

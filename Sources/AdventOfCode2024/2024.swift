@@ -4,7 +4,7 @@ public struct _AdventOfCode2024: Year {
 
     public init() {}
 
-    public var days: [Day] = [
+    public var days: [any Day] = [
         Day1(),
         Day2(),
         Day3(),
