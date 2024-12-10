@@ -7,6 +7,10 @@ public extension Sequence {
     func sorted(using keyPath: KeyPath<Element, some Comparable>) -> [Element] {
         sorted(by: { $0[keyPath: keyPath] < $1[keyPath: keyPath] })
     }
+    
+    func doesNotContain(where predicate: (Element) -> Bool) -> Bool {
+        !contains(where: predicate)
+    }
 }
 
 public extension Sequence<Bool> {
@@ -64,6 +68,10 @@ public extension Sequence where Element: Equatable {
 
     func allEqual(_ element: Element) -> Bool {
         allSatisfy { $0 == element }
+    }
+    
+    func doesNotContain(_ element: Element) -> Bool {
+        !contains(element)
     }
 }
 

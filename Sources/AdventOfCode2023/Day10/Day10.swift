@@ -126,7 +126,7 @@ struct Day10: Day {
             }
             .asArray[0]
 
-        let new = input
+        var new = input
         new[start.x, start.y] = replaceStart
         return new
     }
@@ -146,7 +146,7 @@ struct Day10: Day {
         stepThroughLoop(input: input, startLocation: startNextLocations[0], steps: &steps)
 
         // replace start with pipe type and replace pipes not in main loop with ground
-        let replacedGrid = replacingStart(input: input)
+        var replacedGrid = replacingStart(input: input)
 
         steps[start.x, start.y] = 0
 

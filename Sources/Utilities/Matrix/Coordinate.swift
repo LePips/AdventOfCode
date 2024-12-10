@@ -7,6 +7,27 @@ public struct Coordinate: Hashable {
         self.y = y
     }
     
+    public var nonDiagonalNeighbors: [Coordinate] {
+        [
+            Coordinate(x: x, y: y - 1),
+            Coordinate(x: x, y: y + 1),
+            Coordinate(x: x - 1, y: y),
+            Coordinate(x: x + 1, y: y)
+        ]
+    }
+    
+    public var neighbors: [Coordinate] {
+        [
+            Coordinate(x: x - 1, y: y - 1),
+            Coordinate(x: x, y: y - 1),
+            Coordinate(x: x + 1, y: y - 1),
+            Coordinate(x: x - 1, y: y),
+            Coordinate(x: x + 1, y: y),
+            Coordinate(x: x - 1, y: y + 1),
+            Coordinate(x: x, y: y + 1),
+            Coordinate(x: x + 1, y: y + 1)
+        ]
+    }
 }
 
 public extension Coordinate {

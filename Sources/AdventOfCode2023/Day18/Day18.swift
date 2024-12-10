@@ -1,6 +1,7 @@
 struct Day18: Day {
     
     func f(_ g: Matrix<String>, _ i: Int) {
+        var g = g
         let r = g.rows[i]
         var c = false
         var l = "."
@@ -65,7 +66,7 @@ struct Day18: Day {
         let maxY = coordinates.max(using: \.y)!
         
         let rows = Array(repeating: Array(repeating: ".", count: maxX.x + 1), count: maxY.y + 1)
-        let g = Matrix(rows: rows)
+        var g = Matrix(rows: rows)
         
         for coordinate in coordinates {
             g[coordinate] = "#"

@@ -1,7 +1,7 @@
 // TODO: rename to Grid
 // TODO: conform to Collection?
 
-public class Matrix<Element: CustomStringConvertible> {
+public struct Matrix<Element: CustomStringConvertible> {
 
     public private(set) var rows: [[Element]]
 
@@ -43,7 +43,7 @@ public class Matrix<Element: CustomStringConvertible> {
         rows[y]
     }
 
-    public func insert(row: [Element], at y: Int) {
+    mutating public func insert(row: [Element], at y: Int) {
         assert(row.count == width)
 
         rows.insert(row, at: y)
@@ -139,12 +139,12 @@ public class Matrix<Element: CustomStringConvertible> {
 
 public extension Matrix {
 
-    convenience init(width: Int, height: Int, repeating value: Element) {
+    init(width: Int, height: Int, repeating value: Element) {
         let rows = Array(repeating: Array(repeating: value, count: width), count: height)
         self.init(rows: rows)
     }
 
-    convenience init(columns: [[Element]]) {
+    init(columns: [[Element]]) {
 
         guard let f = columns.first else {
             self.init(rows: [])
@@ -186,6 +186,10 @@ public extension Matrix where Element: Equatable {
     
     func firstLocation(of element: Element) -> Coordinate? {
         firstLocation(where: { $0 == element })
+    }
+    
+    func locations(of element: Element) -> [Coordinate] {
+        locations(where: { $0 == element })
     }
     
     func count(of element: Element) -> Int {

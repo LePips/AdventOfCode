@@ -24,7 +24,7 @@ struct Day6: Day {
 
     func part1() -> CustomStringConvertible? {
         
-        let m = matrix()
+        var m = matrix()
         let start = m.firstLocation(of: "^")!
         m[start] = "."
         
@@ -61,7 +61,7 @@ struct Day6: Day {
 
     func part2() -> CustomStringConvertible? {
         
-        let m = matrix()
+        var m = matrix()
         let start = m.firstLocation(of: "^")!
         m[start] = "."
         
