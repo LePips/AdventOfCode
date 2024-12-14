@@ -43,6 +43,21 @@ public func manhattanDistance(_ a: Coordinate, _ b: Coordinate) -> Int {
 
 public extension BinaryInteger {
     
+    var asInt: Int {
+        Int(self)
+    }
+}
+
+public extension Int {
+    
+    var digits: [Int] {
+        String(self).compactMap { Int(String($0)) }
+    }
+    
+    var digitString: String {
+        String(self)
+    }
+    
     var asDouble: Double {
         Double(self)
     }
@@ -67,7 +82,7 @@ public extension BinaryInteger {
             .contains { self % $0 == 0 }
     }
 
-    func nextPrime() -> Self {
+    func nextPrime() -> Int {
         var n: Self = if isEven {
             self + 1
         } else {
