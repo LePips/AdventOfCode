@@ -227,3 +227,70 @@ extension Matrix: CustomStringConvertible {
         return r
     }
 }
+
+extension Matrix where Element == Int {
+
+    public func _inverted2D() -> Matrix<Double>? {
+        guard width == 2 && height == 2 else {
+            fatalError("Attempted to inverse a non-2x2 matrix")
+        }
+        
+        let determinant = rows[0][0] * rows[1][1] - rows[0][1] * rows[1][0]
+        
+        guard determinant != 0 else { return nil }
+        
+        let dDeterminant = Double(determinant)
+        
+        let r1 = [Double(rows[1][1]) / dDeterminant, Double(-rows[0][1]) / dDeterminant]
+        let r2 = [Double(-rows[1][0]) / dDeterminant, Double(rows[0][0]) / dDeterminant]
+        
+        return Matrix<Double>(rows: [r1, r2])
+    }
+    
+    public func _multiplyScalar(_ scalar: Int) -> Matrix<Int> {
+        map { $0 * scalar }
+    }
+    
+    public func _multiply(_ other: Matrix<Element>) -> Matrix<Element>? {
+        guard width == other.height else {
+            fatalError("Attempted to multiply two matrices with incompatible dimensions")
+        }
+        
+        let newRows = (0 ..< height)
+            .map { y in
+                (0 ..< other.width)
+                    .map { x in
+                        (0 ..< width)
+                            .map { i in
+                                rows[y][i] * other.rows[i][x]
+                            }
+                            .sum()
+                    }
+            }
+        
+        return Matrix<Element>(rows: newRows)
+    }
+}
+
+extension Matrix where Element == Double {
+    
+    public func _multiply(_ other: Matrix<Double>) -> Matrix<Double>? {
+        guard width == other.height else {
+            fatalError("Attempted to multiply two matrices with incompatible dimensions")
+        }
+        
+        let newRows = (0 ..< height)
+            .map { y in
+                (0 ..< other.width)
+                    .map { x in
+                        (0 ..< width)
+                            .map { i in
+                                rows[y][i] * other.rows[i][x]
+                            }
+                            .sum()
+                    }
+            }
+        
+        return Matrix<Double>(rows: newRows)
+    }
+}

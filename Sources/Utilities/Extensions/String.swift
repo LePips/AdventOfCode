@@ -4,6 +4,10 @@ public extension String {
     static let vowels = "aeiou"
 
     static let empty = ""
+    
+    var asDouble: Double? {
+        Double(self)
+    }
 
     var asInt: Int? {
         Int(self)
@@ -56,6 +60,10 @@ public extension String {
 }
 
 public extension Substring {
+    
+    var asDouble: Double? {
+        Double(self)
+    }
 
     var asInt: Int? {
         asString.asInt

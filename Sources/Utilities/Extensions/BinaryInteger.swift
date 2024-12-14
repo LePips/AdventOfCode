@@ -42,6 +42,10 @@ public func manhattanDistance(_ a: Coordinate, _ b: Coordinate) -> Int {
 }
 
 public extension BinaryInteger {
+    
+    var asDouble: Double {
+        Double(self)
+    }
 
     var asInt: Int {
         Int(self)

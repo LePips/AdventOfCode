@@ -37,6 +37,13 @@ public extension Sequence<Int> {
     }
 }
 
+public extension Sequence<Double> {
+    
+    func sum() -> Element {
+        reduce(0, +)
+    }
+}
+
 public extension Sequence where Element: BinaryInteger {
 
     func differences() -> [Element] {
