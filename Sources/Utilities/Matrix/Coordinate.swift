@@ -40,3 +40,10 @@ public extension Coordinate {
         lhs + rhs.coordinate
     }
 }
+
+extension Coordinate: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        "(\(x), \(y))"
+    }
+}
